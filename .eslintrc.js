@@ -20,5 +20,6 @@ module.exports = {
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "warn",
     "jsx-a11y/heading-has-content": 0,
+    "react/state-in-constructor": 0,
   },
 };
