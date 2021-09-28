@@ -5,6 +5,7 @@ import { AiOutlineTwitter, AiOutlineLink } from "react-icons/ai";
 import { MdPlace, MdDomain } from "react-icons/md";
 import { FiSearch } from "react-icons/fi";
 import { BsFillBrightnessHighFill } from "react-icons/bs";
+import { WiMoonWaningCrescent2 } from "react-icons/wi";
 
 // img
 import imgUser from "../../img/userImage.png";
@@ -16,6 +17,7 @@ export default class Home extends Component {
   state = {
     input: "",
     infoUser: {},
+    light: false,
   };
 
   hundleChange = (e) => {
@@ -39,28 +41,44 @@ export default class Home extends Component {
       this.setState({
         infoUser: response,
       });
-      console.log(response);
     });
+  };
+
+  lightNight = () => {
+    const { light } = this.state;
+    this.setState({
+      light: !light,
+    });
+    document.querySelector(".App").id = `${light}`;
   };
 
   formatDate = (dateParams) => {
     const date = new Date(dateParams);
-    console.log(new Date(date));
+    const formattedDate = new Intl.DateTimeFormat("en-us", {
+      dateStyle: "long",
+    }).format(date);
+    return formattedDate.toString();
   };
 
   render() {
-    // eslint-disable-next-line no-unused-vars
-    const { input, infoUser } = this.state;
+    const { input, infoUser, light } = this.state;
     return (
       <Main>
-        <HeaderSection>
+        <HeaderSection value={light}>
           <h1>devFinder</h1>
-          <h3>
-            LIGHT
-            <BsFillBrightnessHighFill className="icon-ligth" />
-          </h3>
+          {!light ? (
+            <button type="button" onClick={this.lightNight} value={light}>
+              LIGHT
+              <BsFillBrightnessHighFill className="icon-ligth" />
+            </button>
+          ) : (
+            <button type="button" onClick={this.lightNight} value={light}>
+              NIGHT
+              <WiMoonWaningCrescent2 size="20" className="icon-night" />
+            </button>
+          )}
         </HeaderSection>
-        <InputDiv>
+        <InputDiv value={light}>
           <span>
             <FiSearch size="30" />
           </span>
@@ -74,7 +92,7 @@ export default class Home extends Component {
             Search
           </button>
         </InputDiv>
-        <GridTemplate>
+        <GridTemplate value={light}>
           <div className="profile-img-content">
             <div className="profile-img">
               <img

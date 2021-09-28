@@ -4,9 +4,18 @@ import styled from "styled-components";
 import * as color from "../../config/color";
 
 export const Main = styled.div`
-  width: 50%;
-  margin: 5rem auto;
+  width: 53%;
+  margin: 2rem auto;
   background-color: transparent;
+  @media (max-width: 900px) {
+    width: 65%;
+  }
+  @media (max-width: 800px) {
+    width: 70%;
+  }
+  @media (max-width: 700px) {
+    width: 90%;
+  }
 `;
 
 export const HeaderSection = styled.section`
@@ -14,18 +23,32 @@ export const HeaderSection = styled.section`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  color: ${color.primaryFontColor};
   h1 {
+    color: ${color.primaryFontColor};
     font-size: 1.5rem;
   }
-  h3 {
+  button {
     display: flex;
     align-items: center;
     cursor: pointer;
     font-size: 0.9rem;
+    color: ${color.primaryFontColor};
+    background-color: transparent;
     .icon-ligth {
       margin-left: 0.8rem;
       color: ${color.primaryFontColor};
+    }
+    .icon-night {
+      margin-left: 0.8rem;
+      color: ${color.segundaryColor};
+    }
+  }
+  &[value="true"] {
+    h1 {
+      color: ${color.backgroundColor};
+    }
+    button {
+      color: ${color.backgroundColor};
     }
   }
 `;
@@ -61,7 +84,12 @@ export const InputDiv = styled.div`
     color: ${color.primaryFontColor};
     background-color: ${color.buttonColor};
   }
+  &[value="true"] {
+    box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.1);
+    background-color: ${color.lightPrimaryColor};
+  }
 `;
+
 export const GridTemplate = styled.div`
   display: grid;
   grid-template-areas:
@@ -92,7 +120,7 @@ export const GridTemplate = styled.div`
     grid-area: infoProfile;
     padding: 1.5rem;
     .info-profile {
-      width: 400px;
+      width: 250px;
       h1 {
         font-size: 1.5rem;
         color: ${color.primaryFontColor};
@@ -109,10 +137,10 @@ export const GridTemplate = styled.div`
     }
     .create-date-profile {
       display: flex;
-      justify-content: start;
-      align-items: start;
-      width: 100px;
-      font-size: 0.7rem;
+      justify-content: center;
+      align-items: center;
+      width: 200px;
+      font-size: 0.5rem;
       color: ${color.segundaryFontColor};
     }
   }
@@ -177,5 +205,34 @@ export const GridTemplate = styled.div`
         grid-area: workplace;
       }
     }
+  }
+  &[value="true"] {
+    background-color: ${color.lightPrimaryColor};
+    box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.2);
+    .profile {
+      .info-profile {
+        h1 {
+          color: ${color.backgroundColor};
+        }
+      }
+    }
+    .profile-two {
+      ul {
+        background-color: ${color.lightBackground};
+        li {
+          h1 {
+            color: ${color.segundaryFontColor};
+          }
+          p {
+            color: ${color.backgroundColor};
+          }
+        }
+      }
+    }
+  }
+  @media (max-width: 800px) {
+    grid-template-areas:
+      "profileContent infoProfile"
+      "profileTwo profileTwo";
   }
 `;

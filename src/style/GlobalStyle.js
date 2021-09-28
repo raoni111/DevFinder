@@ -27,6 +27,9 @@ const GlobalStyle = createGlobalStyle`
       width: 100%;
       height: 100vh;
       background-color: ${color.backgroundColor};
+      &#false {
+        background-color: ${color.lightBackground};
+      }
     }
   }
 `;
