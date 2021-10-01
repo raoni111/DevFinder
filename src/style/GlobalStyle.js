@@ -30,6 +30,9 @@ const GlobalStyle = createGlobalStyle`
       &#false {
         background-color: ${color.lightBackground};
       }
+      @media (max-width: 320px)  {
+        height: 100%;
+      }
     }
   }
 `;

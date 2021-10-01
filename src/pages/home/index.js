@@ -37,11 +37,13 @@ export default class Home extends Component {
       const date = await response.json();
       return date;
     }
-    user(input).then((response) => {
-      this.setState({
-        infoUser: response,
-      });
-    });
+    user(input)
+      .then((response) => {
+        this.setState({
+          infoUser: response,
+        });
+      })
+      .catch(() => console.warn("user not found"));
   };
 
   lightNight = () => {
@@ -94,23 +96,23 @@ export default class Home extends Component {
         </InputDiv>
         <GridTemplate value={light}>
           <div className="profile-img-content">
-            <div className="profile-img">
-              <img
-                src={!infoUser.avatar_url ? imgUser : infoUser.avatar_url}
-                alt=""
-              />
-            </div>
+            <img
+              src={!infoUser.avatar_url ? imgUser : infoUser.avatar_url}
+              alt=""
+            />
           </div>
           <div className="profile">
             <div className="info-profile">
-              <h1>{!infoUser.name ? "name not found" : infoUser.name}</h1>
-              <h3>
+              <h1 className="info-profile-name">
+                {!infoUser.name ? "name not found" : infoUser.name}
+              </h1>
+              <h3 className="info-profile-login">
                 {!infoUser.login ? "login not found" : `@${infoUser.login}`}
               </h3>
-              <p>{!infoUser.bio ? "This profile has no bios" : infoUser.bio}</p>
-            </div>
-            <div className="create-date-profile">
-              <h2>
+              <p className="info-profile-bios">
+                {!infoUser.bio ? "This profile has no bios" : infoUser.bio}
+              </p>
+              <h2 className="info-profile-date">
                 {!infoUser.created_at
                   ? ""
                   : this.formatDate(infoUser.created_at)}

@@ -88,6 +88,14 @@ export const InputDiv = styled.div`
     box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.1);
     background-color: ${color.lightPrimaryColor};
   }
+  @media (max-width: 420px) {
+    input {
+      width: 70%;
+    }
+    button {
+      width: 20%;
+    }
+  }
 `;
 
 export const GridTemplate = styled.div`
@@ -101,16 +109,14 @@ export const GridTemplate = styled.div`
   border-radius: 10px;
   background-color: ${color.primaryColor};
   .profile-img-content {
+    display: flex;
+    justify-content: center;
+    align-items: start;
     grid-area: profileContent;
-    .profile-img {
-      display: flex;
-      overflow: hidden;
+    img {
       width: 100px;
-      margin: 2rem;
+      margin-top: 1rem;
       border-radius: 50%;
-      img {
-        width: 100%;
-      }
     }
   }
   .profile {
@@ -120,28 +126,34 @@ export const GridTemplate = styled.div`
     grid-area: infoProfile;
     padding: 1.5rem;
     .info-profile {
+      display: grid;
+      grid-template-columns: 200px 85%;
+      grid-template-areas:
+        "profileName profileDate"
+        "profileLogin profileDate"
+        "profileBios profileDate";
       width: 250px;
-      h1 {
+      .info-profile-name {
         font-size: 1.5rem;
         color: ${color.primaryFontColor};
+        grid-area: profileName;
       }
-      h3 {
+      .info-profile-login {
         font-size: 1rem;
         color: ${color.buttonColor};
+        grid-area: profileLogin;
       }
-      p {
+      .info-profile-bios {
         margin-top: 1rem;
         font-family: inherit;
         color: ${color.segundaryFontColor};
+        grid-area: profileBios;
       }
-    }
-    .create-date-profile {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      width: 200px;
-      font-size: 0.5rem;
-      color: ${color.segundaryFontColor};
+      .info-profile-date {
+        font-size: 1rem;
+        color: ${color.segundaryFontColor};
+        grid-area: profileDate;
+      }
     }
   }
   .profile-two {
@@ -234,5 +246,43 @@ export const GridTemplate = styled.div`
     grid-template-areas:
       "profileContent infoProfile"
       "profileTwo profileTwo";
+  }
+  @media (max-width: 600px) {
+    .profile {
+      padding: 1rem;
+      .info-profile {
+        width: 100%;
+        grid-template-columns: 100%;
+        grid-template-areas:
+          "profileName"
+          "profileLogin"
+          "profileDate"
+          "profileBios";
+      }
+    }
+  }
+  @media (max-width: 500px) {
+    grid-template-columns: 30% 70%;
+    .grid-info-profile {
+      grid-template-columns: 100% !important;
+      grid-template-rows: 1fr 1fr;
+      grid-template-areas:
+        "location"
+        "blog"
+        "twitter"
+        "workplace" !important;
+    }
+    .profile-img-content {
+      img {
+        width: 80px;
+      }
+    }
+    .profile {
+      .info-profile {
+        .info-profile-name {
+          font-size: 1.3rem;
+        }
+      }
+    }
   }
 `;
